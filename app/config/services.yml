@@ -5,4 +5,23 @@ services:
         autowire: true
         public: false
 
+    AppBundle\Controller\ImageController:
+        arguments:
+            $filesystem: '@oneup_flysystem.tmp_filesystem'
+        tags:
+            - { name: controller.service_arguments }
+
     AppBundle\Doctrine\Mapping\NamingStrategy: ~
+
+    AppBundle\EventListener\MediaListener:
+        arguments:
+            $filesystem: '@oneup_flysystem.media_filesystem'
+        tags:
+            - { name: doctrine.event_listener , event: postLoad }
+            - { name: doctrine.event_listener , event: postPersist }
+            - { name: doctrine.event_listener , event: postRemove }
+
+    AppBundle\Metadata\Property\Factory\PropertyNameCollectionFactory:
+        arguments:
+            $decorated: '@AppBundle\Metadata\Property\Factory\PropertyNameCollectionFactory.inner'
+        decorates: api_platform.metadata.property.name_collection_factory
