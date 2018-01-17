@@ -1,0 +1,26 @@
+imports:
+    - { resource: config.yml }
+
+doctrine:
+    orm:
+        metadata_cache_driver: apcu
+        query_cache_driver: apcu
+        result_cache_driver: apcu
+
+monolog:
+    handlers:
+        console:
+            channels:
+                - '!doctrine'
+                - '!event'
+            process_psr_3_messages: false
+            type: console
+        main:
+            action_level: error
+            handler: nested
+            type: fingers_crossed
+        nested:
+            level: debug
+            path: php://stderr
+            process_psr_3_messages: false
+            type: stream

@@ -1,0 +1,83 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+api_platform:
+    collection:
+        pagination:
+            client_items_per_page: true
+
+doctrine:
+    dbal:
+        charset: UTF8
+        dbname: '%database_name%'
+        driver: pdo_pgsql
+        host: '%database_host%'
+        password: '%database_password%'
+        port: '%database_port%'
+        user: '%database_user%'
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        auto_mapping: true
+        naming_strategy: AppBundle\Doctrine\Mapping\NamingStrategy
+
+framework:
+    assets: ~
+    csrf_protection: false
+    default_locale: '%locale%'
+    fragments: false
+    form: false
+    http_method_override: true
+    php_errors:
+        log: true
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+        strict_requirements: ~
+    secret: '%secret%'
+    serializer:
+        enable_annotations: true
+    session: false
+    templating:
+        engines:
+            - twig
+    validation:
+        enable_annotations: true
+    trusted_hosts: ~
+
+nelmio_cors:
+    defaults:
+        allow_headers:
+            - authorization
+            - content-type
+        allow_methods:
+            - DELETE
+            - GET
+            - OPTIONS
+            - POST
+            - PUT
+        allow_origin: '%cors_allow_origin%'
+        expose_headers:
+            - link
+        max_age: 3600
+    paths:
+        '^/': ~
+
+sensio_framework_extra:
+    cache:
+        annotations: false
+    psr_message:
+        enabled: false
+    request:
+        auto_convert: true
+        converters: true
+    router:
+        annotations: false
+    security:
+        annotations: false
+    view:
+        annotations: false
+
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'

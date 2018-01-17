@@ -1,0 +1,14 @@
+imports:
+    - { resource: config_dev.yml }
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path: '%kernel.cache_dir%/db.sqlite'
+
+framework:
+    test: ~
+
+web_profiler:
+    intercept_redirects: false
+    toolbar: false

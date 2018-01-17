@@ -1,0 +1,19 @@
+parameters:
+
+    # database parameters
+
+    database_host: 127.0.0.1
+    database_name: api
+    database_password: ~
+    database_port: ~
+    database_user: root
+
+    # internationalization parameters
+
+    locale: en
+
+    # security parameters
+
+    cors_allow_origin:
+        - '*'
+    secret: ThisTokenIsNotSoSecretChangeIt
